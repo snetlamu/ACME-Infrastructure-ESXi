@@ -26,7 +26,6 @@ resource "vsphere_virtual_machine" "Router" {
     datastore_id     = data.vsphere_datastore.Datastore.id
     label            = "disk0"
     thin_provisioned = true
-    attach           = true
   }
 
   cdrom {

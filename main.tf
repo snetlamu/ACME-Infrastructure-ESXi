@@ -81,7 +81,7 @@ resource "time_sleep" "Wait-to-Configure-Router" {
 
 resource "cdo_ftd_device" "SCC-FTDs" {
   for_each           = toset(var.cdfmc_managed_ftds)
-  name               = "${each.value}-FTD"
+  name               = "ACME-${each.value}-FTD"
   access_policy_name = "Default Access Control Policy"
   licenses           = ["BASE", "CARRIER", "THREAT", "MALWARE", "URLFilter"]
   virtual            = true

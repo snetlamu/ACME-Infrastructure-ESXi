@@ -39,7 +39,7 @@ variable "datastore" {
 variable "child_resource_pools" {
   description = "List of Child Resource Pools to be created"
   type        = list(string)
-  default     = ["Management", "Corporate", "Branch-1", "Traffic-Generator", "Datacenter-1", "Datacenter-2", "SW-Appliance", "FDM", "Guest", "DMZ"]
+  default     = ["Management", "Corporate", "Branch-1", "Traffic-Generator", "Datacenter", "Datacenter-1", "Datacenter-2", "SW-Appliance", "FDM", "Guest", "DMZ"]
 }
 
 variable "port_groups" {

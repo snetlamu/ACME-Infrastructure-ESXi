@@ -58,7 +58,7 @@ resource "vsphere_virtual_machine" "Router" {
       "hostname"          = "management-router",
       "login-username"    = "admin",
       "login-password"    = var.password,
-      "mgmt-ipv4-addr"    = "10.0.100.1/24",
+      "mgmt-ipv4-addr"    = "10.0.100.2/24",
       "mgmt-ipv4-network" = "10.0.100.0/24"
     }
   }

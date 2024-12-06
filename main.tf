@@ -31,11 +31,11 @@ resource "vsphere_virtual_machine" "Router" {
   }
 
   network_interface {
-    network_id = [for port_group in data.vsphere_network : port_group.id if port_group.name == var.port_groups["Management"]][0]
+    network_id = [for port_group in data.vsphere_network.Port-Groups : port_group.id if port_group.name == var.port_groups["Management"]][0]
   }
 
   network_interface {
-    network_id = [for port_group in data.vsphere_network : port_group.id if port_group.name == var.port_groups["Cisco-DMZ"]][0]
+    network_id = [for port_group in data.vsphere_network.Port-Groups : port_group.id if port_group.name == var.port_groups["Cisco-DMZ"]][0]
   }
 
   vapp {

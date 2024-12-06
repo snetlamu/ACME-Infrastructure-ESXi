@@ -18,7 +18,7 @@ data "vsphere_content_library_item" "CSR1000v" {
 }
 
 data "vsphere_datastore" "Datastore" {
-  name          = "disk72-2-raid0"
+  name          = var.datastore
   datacenter_id = data.vsphere_datacenter.Datacenter.id
 }
 

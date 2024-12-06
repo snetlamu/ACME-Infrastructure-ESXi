@@ -30,6 +30,12 @@ variable "host" {
   type        = string
 }
 
+variable "datastore" {
+  description = "Datastore Name"
+  type        = string
+  default     = "disk72-2-raid0"
+}
+
 variable "child_resource_pools" {
   description = "List of Child Resource Pools to be created"
   type        = list(string)

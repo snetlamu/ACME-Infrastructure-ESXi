@@ -39,7 +39,7 @@ variable "datastore" {
 variable "child_resource_pools" {
   description = "List of Child Resource Pools to be created"
   type        = list(string)
-  default     = ["Management", "Corporate", "Branch-1", "Traffic Generator", "Datacenter-1", "Datacenter-2", "SW-Appliance", "FDM", "Guest", "DMZ"]
+  default     = ["Management", "Corporate", "Branch-1", "Traffic-Generator", "Datacenter-1", "Datacenter-2", "SW-Appliance", "FDM", "Guest", "DMZ"]
 }
 
 variable "port_groups" {
@@ -65,4 +65,21 @@ variable "password" {
   description = "Password to be set in all the resources created by the template"
   type        = string
   sensitive   = true
+}
+
+variable "scc_api_token" {
+  description = "SCC API Token"
+  type        = string
+  sensitive   = true
+}
+
+variable "scc_base_url" {
+  description = "SCC Base URL"
+  type        = string
+}
+
+variable "cdfmc_managed_ftds" {
+  description = "List of cdFMC managed FTDs"
+  type        = list(string)
+  default     = ["Corporate", "Branch-1", "Traffic-Generator", "Datacenter"]
 }

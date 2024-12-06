@@ -17,6 +17,16 @@ data "vsphere_content_library_item" "CSR1000v" {
   library_id = data.vsphere_content_library.Router-Images.id
 }
 
+data "vsphere_content_library" "FTDv-Images" {
+  name = "FTDv-Images"
+}
+
+data "vsphere_content_library_item" "FTDv-7-6" {
+  name       = "FTDv-7.6.0-113"
+  type       = "ovf"
+  library_id = data.vsphere_content_library.FTDv-Images.id
+}
+
 data "vsphere_datastore" "Datastore" {
   name          = var.datastore
   datacenter_id = data.vsphere_datacenter.Datacenter.id
@@ -27,3 +37,5 @@ data "vsphere_network" "Port-Groups" {
   datacenter_id = data.vsphere_datacenter.Datacenter.id
   name          = each.value
 }
+
+data "cdo_cdfmc" "cdFMC" {}

@@ -16,7 +16,7 @@ resource "vsphere_virtual_machine" "Router" {
   num_cpus = 4
   memory   = 4 * 1024
 
-  resource_pool_id           = [for child_pool in vsphere_resource_pool.Child-Pools : child_pool.id if child_pool.name == "${var.prefix}-${var.child_resource_pools[0]}"][0]
+  resource_pool_id           = vsphere_resource_pool.Child-Pools["Management"].id
   datastore_id               = data.vsphere_datastore.Datastore.id
   wait_for_guest_net_timeout = 0
   wait_for_guest_ip_timeout  = 0
@@ -29,9 +29,9 @@ resource "vsphere_virtual_machine" "Router" {
     thin_provisioned = true
   }
 
-  cdrom {
-    client_device = true
-  }
+#   cdrom {
+#     client_device = true
+#   }
 
 
   clone {
@@ -40,17 +40,17 @@ resource "vsphere_virtual_machine" "Router" {
 
   network_interface {
     ovf_mapping = "GigabitEthernet1"
-    network_id  = [for port_group in data.vsphere_network.Port-Groups : port_group.id if port_group.name == var.port_groups["Management"]][0]
+    network_id  = data.vsphere_network.Port-Groups["Management"].id
   }
 
   network_interface {
     ovf_mapping = "GigabitEthernet2"
-    network_id  = [for port_group in data.vsphere_network.Port-Groups : port_group.id if port_group.name == var.port_groups["Cisco-DMZ"]][0]
+    network_id  = data.vsphere_network.Port-Groups["Cisco-DMZ"].id
   }
 
   network_interface {
     ovf_mapping = "GigabitEthernet3"
-    network_id  = [for port_group in data.vsphere_network.Port-Groups : port_group.id if port_group.name == var.port_groups["Management"]][0]
+    network_id  = data.vsphere_network.Port-Groups["Management"].id
   }
 
   vapp {
@@ -58,7 +58,7 @@ resource "vsphere_virtual_machine" "Router" {
       "hostname"          = "management-router",
       "login-username"    = "admin",
       "login-password"    = var.password,
-      "mgmt-ipv4-addr"    = "10.0.100.2/24",
+      "mgmt-ipv4-addr"    = "10.0.100.1/24",
       "mgmt-ipv4-network" = "10.0.100.0/24"
     }
   }

@@ -22,20 +22,17 @@ resource "vsphere_virtual_machine" "Router" {
   wait_for_guest_ip_timeout  = 0
   scsi_type                  = "lsilogic"
 
-  disk {
-    datastore_id     = data.vsphere_datastore.Datastore.id
-    label            = "disk0"
-    size             = 8
-    thin_provisioned = true
-  }
+  #   disk {
+  #     datastore_id     = data.vsphere_datastore.Datastore.id
+  #     label            = "disk0"
+  #     size             = 8
+  #     thin_provisioned = true
+  #   }
 
   cdrom {
     client_device = true
   }
 
-  cdrom {
-    client_device = true
-  }
 
   clone {
     template_uuid = data.vsphere_content_library_item.CSR1000v.id

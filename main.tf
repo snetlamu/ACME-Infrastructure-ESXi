@@ -18,6 +18,8 @@ resource "vsphere_virtual_machine" "Router" {
 
   resource_pool_id = [for child_pool in vsphere_resource_pool.Child-Pools : child_pool.id if child_pool.name == "${var.prefix}-${var.child_resource_pools[0]}"][0]
   datastore_id     = data.vsphere_datastore.Datastore.id
+  wait_for_guest_net_timeout = 0
+  wait_for_guest_ip_timeout  = 0
 
   disk {
     datastore_id     = data.vsphere_datastore.Datastore.id

@@ -31,12 +31,12 @@ resource "vsphere_virtual_machine" "Router" {
   }
 
   cdrom {
-    client_device = true
-  }
-
-  cdrom {
     datastore_id = data.vsphere_datastore.Datastore.id
     path = "/${var.prefix}-CSR1000v/_deviceImage-0.iso"
+  }
+  
+  cdrom {
+    client_device = true
   }
 
 

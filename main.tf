@@ -96,6 +96,10 @@ resource "vsphere_virtual_machine" "Corporate-FTD" {
   wait_for_guest_ip_timeout  = 0
   scsi_type                  = "lsilogic"
 
+  clone {
+    template_uuid = data.vsphere_content_library_item.FTDv-7-6.id
+  }
+
   disk {
     datastore_id     = data.vsphere_datastore.Datastore.id
     label            = "disk0"
@@ -172,6 +176,10 @@ resource "vsphere_virtual_machine" "Branch-1-FTD" {
   wait_for_guest_ip_timeout  = 0
   scsi_type                  = "lsilogic"
 
+  clone {
+    template_uuid = data.vsphere_content_library_item.FTDv-7-6.id
+  }
+
   disk {
     datastore_id     = data.vsphere_datastore.Datastore.id
     label            = "disk0"
@@ -237,6 +245,10 @@ resource "vsphere_virtual_machine" "Traffic-Generator-FTD" {
   wait_for_guest_net_timeout = 0
   wait_for_guest_ip_timeout  = 0
   scsi_type                  = "lsilogic"
+
+  clone {
+    template_uuid = data.vsphere_content_library_item.FTDv-7-6.id
+  }
 
   disk {
     datastore_id     = data.vsphere_datastore.Datastore.id
@@ -308,6 +320,10 @@ resource "vsphere_virtual_machine" "Datacenter-FTD" {
   wait_for_guest_net_timeout = 0
   wait_for_guest_ip_timeout  = 0
   scsi_type                  = "lsilogic"
+
+  clone {
+    template_uuid = data.vsphere_content_library_item.FTDv-7-6.id
+  }
 
   disk {
     datastore_id     = data.vsphere_datastore.Datastore.id
@@ -384,6 +400,10 @@ resource "vsphere_virtual_machine" "FDM-FTD" {
   wait_for_guest_net_timeout = 0
   wait_for_guest_ip_timeout  = 0
   scsi_type                  = "lsilogic"
+
+  clone {
+    template_uuid = data.vsphere_content_library_item.FTDv-7-6.id
+  }
 
   disk {
     datastore_id     = data.vsphere_datastore.Datastore.id

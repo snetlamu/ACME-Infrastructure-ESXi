@@ -34,6 +34,10 @@ resource "vsphere_virtual_machine" "Router" {
     client_device = true
   }
 
+  cdrom {
+    client_device = true
+  }
+
 
   clone {
     template_uuid = data.vsphere_content_library_item.CSR1000v.id

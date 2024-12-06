@@ -1,12 +1,10 @@
-resource "vsphere_compute_cluster" "Infrastructure" {
-  datacenter_id = data.vsphere_datacenter.datacenter.id
-  host_system_ids = [ data.vsphere_host.host.id ]
-  name = "${var.prefix}-Infrastructure"
+resource "vsphere_resource_pool" "Parent_Pool" {
+  parent_resource_pool_id = data.vsphere_host.host.resource_pool_id
+  name                    = "${var.prefix}-Infrastructure"
 }
 
-resource "vsphere_compute_cluster" "Management" {
-  for_each = toset(var.clusters)
-  datacenter_id = data.vsphere_datacenter.datacenter.id
-  host_system_ids = [ vsphere_compute_cluster.Infrastructure.id ]
-  name = "${var.prefix}-${each.value}"
+resource "vsphere_resource_pool" "Child_Pools" {
+  for_each                = toset(var.clusters)
+  parent_resource_pool_id = vsphere_resource_pool.Infrastructure.id
+  name                    = "${var.prefix}-${each.value}"
 }

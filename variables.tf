@@ -32,6 +32,6 @@ variable "host" {
 
 variable "clusters" {
   description = "List of clusters to be created"
-  type = list(string)
-  default = [ "Management", "Corporate", "Datacenter-1", "Datacenter-2", "Branch-1", "Traffic Generator", "DMZ", "Guest", "FDM" ]
+  type        = list(string)
+  default     = ["Management", "Corporate", "Datacenter-1", "Datacenter-2", "Branch-1", "Traffic Generator", "DMZ", "Guest", "FDM"]
 }

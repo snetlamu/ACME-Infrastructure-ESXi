@@ -16,7 +16,7 @@ resource "vsphere_virtual_machine" "Router" {
   num_cpus = 4
   memory   = 4 * 1024
 
-  resource_pool_id = vsphere_resource_pool.Child_Pools[0]
+  resource_pool_id = vsphere_resource_pool.Child_Pools[0].id
   datastore_id     = data.vsphere_datastore.Datastore.id
 
   disk {

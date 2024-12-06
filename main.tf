@@ -1,10 +1,10 @@
 # Resource Pools
-resource "vsphere_resource_pool" "Parent_Pool" {
+resource "vsphere_resource_pool" "Parent-Pool" {
   parent_resource_pool_id = data.vsphere_host.Host.resource_pool_id
   name                    = "${var.prefix}-Infrastructure"
 }
 
-resource "vsphere_resource_pool" "Child_Pools" {
+resource "vsphere_resource_pool" "Child-Pools" {
   for_each                = toset(var.child_resource_pools)
   parent_resource_pool_id = vsphere_resource_pool.Parent_Pool.id
   name                    = "${var.prefix}-${each.value}"
@@ -16,7 +16,7 @@ resource "vsphere_virtual_machine" "Router" {
   num_cpus = 4
   memory   = 4 * 1024
 
-  resource_pool_id = vsphere_resource_pool.Child_Pools[0].id
+  resource_pool_id = [for child_pool in vsphere_resource_pool.Child-Pools : child_pool.id if child_pool.name == "${var.var.prefix}-${var.child_resource_pools[0]}"][0]
   datastore_id     = data.vsphere_datastore.Datastore.id
 
   disk {

@@ -6,7 +6,7 @@ resource "vsphere_resource_pool" "Parent-Pool" {
 
 resource "vsphere_resource_pool" "Child-Pools" {
   for_each                = toset(var.child_resource_pools)
-  parent_resource_pool_id = vsphere_resource_pool.Parent_Pool.id
+  parent_resource_pool_id = vsphere_resource_pool.Parent-Pool.id
   name                    = "${var.prefix}-${each.value}"
 }
 

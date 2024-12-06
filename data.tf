@@ -22,7 +22,7 @@ data "vsphere_content_library" "FTDv-Images" {
 }
 
 data "vsphere_content_library_item" "FTDv-7-6" {
-  name       = "FTDv-7.6.0-113"
+  name       = "FTDv-VI-7.6.0-113"
   type       = "ovf"
   library_id = data.vsphere_content_library.FTDv-Images.id
 }

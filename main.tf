@@ -144,7 +144,6 @@ resource "vsphere_virtual_machine" "Corporate-FTD" {
 
   vapp {
     properties = {
-      "EULA"          = "accept"
       "pw"            = var.password,
       "ipv4.how"      = "Manual",
       "ipv4.addr"     = "10.0.100.110",
@@ -215,7 +214,6 @@ resource "vsphere_virtual_machine" "Branch-1-FTD" {
 
   vapp {
     properties = {
-      "EULA"          = "accept"
       "pw"            = var.password,
       "ipv4.how"      = "Manual",
       "ipv4.addr"     = "10.0.100.111",
@@ -291,7 +289,6 @@ resource "vsphere_virtual_machine" "Traffic-Generator-FTD" {
 
   vapp {
     properties = {
-      "EULA"          = "accept"
       "pw"            = var.password,
       "ipv4.how"      = "Manual",
       "ipv4.addr"     = "10.0.100.112",
@@ -372,7 +369,6 @@ resource "vsphere_virtual_machine" "Datacenter-FTD" {
 
   vapp {
     properties = {
-      "EULA"          = "accept"
       "pw"            = var.password,
       "ipv4.how"      = "Manual",
       "ipv4.addr"     = "10.0.100.113",
@@ -443,19 +439,18 @@ resource "vsphere_virtual_machine" "FDM-FTD" {
 
   vapp {
     properties = {
-      "EULA"          = "accept"
-      "AdminPassword" = var.password,
-      "IPv4Mode"      = "Manual",
-      "IPv4Addr"      = "10.0.100.114",
-      "IPv4Gw"        = "10.0.100.1",
-      "IPv4Mask"      = "255.255.255.0",
-      "IPv6Mode"      = "disabled",
-      "Hostname"      = "fdm-ftd",
-      "FirewallMode"  = "routed",
-      "DNS1"          = "208.67.222.222",
-      "DNS2"          = "208.67.220.220",
-      "DNS3"          = "10.0.100.102",
-      "ManageLocally" = "Yes"
+      "pw"            = var.password,
+      "ipv4.how"      = "Manual",
+      "ipv4.addr"     = "10.0.100.114",
+      "ipv4.gw"       = "10.0.100.1",
+      "ipv4.mask"     = "255.255.255.0",
+      "ipv6.how"      = "No",
+      "fqdn"          = "fdm-ftd",
+      "firewallmode"  = "routed",
+      "dns1"          = "208.67.222.222",
+      "dns2"          = "208.67.220.220",
+      "dns3"          = "10.0.100.102",
+      "manageLocally" = "Yes"
     }
   }
 }

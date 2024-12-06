@@ -26,6 +26,8 @@ resource "vsphere_virtual_machine" "Router" {
     thin_provisioned = true
   }
 
+  ovf_deploy {}
+
   clone {
     template_uuid = data.vsphere_content_library_item.CSR1000v.id
   }

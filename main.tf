@@ -144,6 +144,7 @@ resource "vsphere_virtual_machine" "Corporate-FTD" {
 
   vapp {
     properties = {
+        "EULA" = "accept"
       "pw"            = var.password,
       "ipv4.how"      = "Manual",
       "ipv4.addr"     = "10.0.100.110",
@@ -214,6 +215,7 @@ resource "vsphere_virtual_machine" "Branch-1-FTD" {
 
   vapp {
     properties = {
+        "EULA" = "accept"
       "pw"            = var.password,
       "ipv4.how"      = "Manual",
       "ipv4.addr"     = "10.0.100.111",
@@ -289,6 +291,7 @@ resource "vsphere_virtual_machine" "Traffic-Generator-FTD" {
 
   vapp {
     properties = {
+        "EULA" = "accept"
       "pw"            = var.password,
       "ipv4.how"      = "Manual",
       "ipv4.addr"     = "10.0.100.112",
@@ -369,6 +372,7 @@ resource "vsphere_virtual_machine" "Datacenter-FTD" {
 
   vapp {
     properties = {
+        "EULA" = "accept"
       "pw"            = var.password,
       "ipv4.how"      = "Manual",
       "ipv4.addr"     = "10.0.100.113",
@@ -439,6 +443,7 @@ resource "vsphere_virtual_machine" "FDM-FTD" {
 
   vapp {
     properties = {
+      "EULA" = "accept"
       "pw"            = var.password,
       "ipv4.how"      = "Manual",
       "ipv4.addr"     = "10.0.100.114",

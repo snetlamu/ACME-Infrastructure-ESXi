@@ -103,7 +103,7 @@ resource "vsphere_virtual_machine" "Corporate-FTD" {
   disk {
     datastore_id     = data.vsphere_datastore.Datastore.id
     label            = "disk0"
-    size             = 40
+    size             = 50
     thin_provisioned = true
     controller_type  = "scsi"
   }
@@ -181,7 +181,7 @@ resource "vsphere_virtual_machine" "Branch-1-FTD" {
   disk {
     datastore_id     = data.vsphere_datastore.Datastore.id
     label            = "disk0"
-    size             = 40
+    size             = 50
     thin_provisioned = true
     controller_type  = "scsi"
   }
@@ -250,7 +250,7 @@ resource "vsphere_virtual_machine" "Traffic-Generator-FTD" {
   disk {
     datastore_id     = data.vsphere_datastore.Datastore.id
     label            = "disk0"
-    size             = 40
+    size             = 50
     thin_provisioned = true
     controller_type  = "scsi"
   }
@@ -324,7 +324,7 @@ resource "vsphere_virtual_machine" "Datacenter-FTD" {
   disk {
     datastore_id     = data.vsphere_datastore.Datastore.id
     label            = "disk0"
-    size             = 40
+    size             = 50
     thin_provisioned = true
     controller_type  = "scsi"
   }
@@ -403,7 +403,7 @@ resource "vsphere_virtual_machine" "FDM-FTD" {
   disk {
     datastore_id     = data.vsphere_datastore.Datastore.id
     label            = "disk0"
-    size             = 40
+    size             = 50
     thin_provisioned = true
     controller_type  = "scsi"
   }

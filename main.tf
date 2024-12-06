@@ -26,23 +26,28 @@ resource "vsphere_virtual_machine" "Router" {
     thin_provisioned = true
   }
 
+  cdrom {
+    client_device = true
+  }
+
+
   clone {
     template_uuid = data.vsphere_content_library_item.CSR1000v.id
   }
 
   network_interface {
     ovf_mapping = "GigabitEthernet1"
-    network_id = [for port_group in data.vsphere_network.Port-Groups : port_group.id if port_group.name == var.port_groups["Management"]][0]
+    network_id  = [for port_group in data.vsphere_network.Port-Groups : port_group.id if port_group.name == var.port_groups["Management"]][0]
   }
 
   network_interface {
     ovf_mapping = "GigabitEthernet2"
-    network_id = [for port_group in data.vsphere_network.Port-Groups : port_group.id if port_group.name == var.port_groups["Cisco-DMZ"]][0]
+    network_id  = [for port_group in data.vsphere_network.Port-Groups : port_group.id if port_group.name == var.port_groups["Cisco-DMZ"]][0]
   }
 
   network_interface {
     ovf_mapping = "GigabitEthernet3"
-    network_id = [for port_group in data.vsphere_network.Port-Groups : port_group.id if port_group.name == var.port_groups["Management"]][0]
+    network_id  = [for port_group in data.vsphere_network.Port-Groups : port_group.id if port_group.name == var.port_groups["Management"]][0]
   }
 
   vapp {

@@ -72,6 +72,11 @@ resource "vsphere_virtual_machine" "Router" {
   }
 }
 
+resource "time_sleep" "Wait-to-Configure-Router" {
+  depends_on      = [vsphere_virtual_machine.Router]
+  create_duration = "10m"
+}
+
 # SCC
 
 resource "cdo_ftd_device" "SCC-FTDs" {
@@ -86,9 +91,10 @@ resource "cdo_ftd_device" "SCC-FTDs" {
 # Corporate
 
 resource "vsphere_virtual_machine" "Corporate-FTD" {
-  name     = "${var.prefix}-Corporate-FTD"
-  num_cpus = 8
-  memory   = 16 * 1024
+  depends_on = [time_sleep.Wait-to-Configure-Router]
+  name       = "${var.prefix}-Corporate-FTD"
+  num_cpus   = 8
+  memory     = 16 * 1024
 
   resource_pool_id           = vsphere_resource_pool.Child-Pools["Corporate"].id
   datastore_id               = data.vsphere_datastore.Datastore.id
@@ -164,9 +170,10 @@ resource "vsphere_virtual_machine" "Corporate-FTD" {
 # Branch-1
 
 resource "vsphere_virtual_machine" "Branch-1-FTD" {
-  name     = "${var.prefix}-Branch-1-FTD"
-  num_cpus = 8
-  memory   = 16 * 1024
+  depends_on = [time_sleep.Wait-to-Configure-Router]
+  name       = "${var.prefix}-Branch-1-FTD"
+  num_cpus   = 8
+  memory     = 16 * 1024
 
   resource_pool_id           = vsphere_resource_pool.Child-Pools["Branch-1"].id
   datastore_id               = data.vsphere_datastore.Datastore.id
@@ -233,9 +240,10 @@ resource "vsphere_virtual_machine" "Branch-1-FTD" {
 # Traffic Generator
 
 resource "vsphere_virtual_machine" "Traffic-Generator-FTD" {
-  name     = "${var.prefix}-Traffic-Generator-FTD"
-  num_cpus = 8
-  memory   = 16 * 1024
+  depends_on = [time_sleep.Wait-to-Configure-Router]
+  name       = "${var.prefix}-Traffic-Generator-FTD"
+  num_cpus   = 8
+  memory     = 16 * 1024
 
   resource_pool_id           = vsphere_resource_pool.Child-Pools["Traffic-Generator"].id
   datastore_id               = data.vsphere_datastore.Datastore.id
@@ -307,9 +315,10 @@ resource "vsphere_virtual_machine" "Traffic-Generator-FTD" {
 # Datacenter
 
 resource "vsphere_virtual_machine" "Datacenter-FTD" {
-  name     = "${var.prefix}-Datacenter-FTD"
-  num_cpus = 8
-  memory   = 16 * 1024
+  depends_on = [time_sleep.Wait-to-Configure-Router]
+  name       = "${var.prefix}-Datacenter-FTD"
+  num_cpus   = 8
+  memory     = 16 * 1024
 
   resource_pool_id           = vsphere_resource_pool.Child-Pools["Datacenter"].id
   datastore_id               = data.vsphere_datastore.Datastore.id

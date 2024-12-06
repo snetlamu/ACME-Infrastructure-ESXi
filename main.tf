@@ -20,7 +20,7 @@ resource "vsphere_virtual_machine" "Router" {
   datastore_id               = data.vsphere_datastore.Datastore.id
   wait_for_guest_net_timeout = 0
   wait_for_guest_ip_timeout  = 0
-  scsi_type                  = "lsilogic"
+  scsi_type                  = "pvscsi"
 
   disk {
     datastore_id     = data.vsphere_datastore.Datastore.id
@@ -58,8 +58,8 @@ resource "vsphere_virtual_machine" "Router" {
       "hostname"          = "management-router",
       "login-username"    = "admin",
       "login-password"    = var.password,
-      "mgmt-ipv4-addr"    = "10.0.100.1/24"
-      "mgmt-ipv4-network" = "10.0.100.0/24",
+      "mgmt-ipv4-addr"    = "10.0.100.1/24",
+      "mgmt-ipv4-network" = "10.0.100.0/24"
     }
   }
 }

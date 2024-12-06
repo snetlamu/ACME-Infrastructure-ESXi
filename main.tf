@@ -1,10 +1,77 @@
+# Resource Pools
 resource "vsphere_resource_pool" "Parent_Pool" {
-  parent_resource_pool_id = data.vsphere_host.host.resource_pool_id
+  parent_resource_pool_id = data.vsphere_host.Host.resource_pool_id
   name                    = "${var.prefix}-Infrastructure"
 }
 
 resource "vsphere_resource_pool" "Child_Pools" {
-  for_each                = toset(var.clusters)
+  for_each                = toset(var.child_resource_pools)
   parent_resource_pool_id = vsphere_resource_pool.Parent_Pool.id
   name                    = "${var.prefix}-${each.value}"
 }
+
+# Management
+resource "vsphere_virtual_machine" "Router" {
+  name     = "${var.prefix}-CSR1000v"
+  num_cpus = 4
+  memory   = 4 * 1024
+
+  resource_pool_id = vsphere_resource_pool.Child_Pools[0]
+  datastore_id     = data.vsphere_datastore.Datastore.id
+
+  disk {
+    label            = "disk0"
+    size             = 8
+    attach           = true
+    thin_provisioned = true
+  }
+
+  clone {
+    template_uuid = data.vsphere_content_library_item.CSR1000v.id
+  }
+
+  network_interface {
+    network_id = [for port_group in data.vsphere_network : port_group.id if port_group.name == var.port_groups["Management"]][0]
+  }
+
+  network_interface {
+    network_id = [for port_group in data.vsphere_network : port_group.id if port_group.name == var.port_groups["Cisco-DMZ"]][0]
+  }
+
+  vapp {
+    properties = {
+      "hostname"          = "management-router",
+      "login-username"    = "admin",
+      "login-password"    = var.password,
+      "mgmt-ipv4-addr"    = "10.0.100.1/24"
+      "mgmt-ipv4-network" = "10.0.100.0/24",
+    }
+  }
+}
+
+# Corporate
+
+
+# Branch-1
+
+
+# Traffic Generator
+
+
+# Datacenter-1
+
+
+# Datacenter-2
+
+
+# SW-Appliance
+
+
+# FDM
+
+
+# Guest
+
+
+# DMZ
+

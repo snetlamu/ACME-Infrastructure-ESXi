@@ -25,13 +25,14 @@ resource "vsphere_virtual_machine" "Router" {
   disk {
     datastore_id     = data.vsphere_datastore.Datastore.id
     label            = "disk0"
-    size             = 8
+    size             = 10
     thin_provisioned = true
+    controller_type  = "scsi"
   }
 
-#   cdrom {
-#     client_device = true
-#   }
+  cdrom {
+    client_device = true
+  }
 
 
   clone {

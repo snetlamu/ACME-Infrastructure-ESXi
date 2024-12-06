@@ -448,3 +448,14 @@ resource "vsphere_virtual_machine" "FDM-FTD" {
     }
   }
 }
+
+resource "time_sleep" "Wait-for-FTD-Initialisation" {
+  depends_on      = [vsphere_virtual_machine.Corporate-FTD, vsphere_virtual_machine.Branch-1-FTD, vsphere_virtual_machine.Traffic-Generator-FTD, vsphere_virtual_machine.Datacenter-FTD, vsphere_virtual_machine.FDM-FTD]
+  create_duration = "15m"
+}
+
+resource "cdo_ftd_device_onboarding" "Register-FTDs-to-cdFMC" {
+  depends_on = [time_sleep.Wait-for-FTD-Initialisation]
+  for_each   = toset(var.cdfmc_managed_ftds)
+  ftd_uid    = cdo_ftd_device.SCC-FTDs[each.value].id
+}

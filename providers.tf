@@ -8,6 +8,10 @@ terraform {
       source  = "CiscoDevNet/cdo"
       version = "3.2.0"
     }
+    time = {
+      source  = "hashicorp/time"
+      version = "0.12.1"
+    }
   }
 }
 
@@ -23,3 +27,5 @@ provider "cdo" {
   base_url  = var.scc_base_url
   api_token = var.scc_api_token
 }
+
+provider "time" {}
